@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,6 +12,7 @@ import { BlogpostListComponent } from './components/features/blog-post/blogpost-
 import { AddBlogpostComponent } from './components/features/blog-post/add-blogpost/add-blogpost.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { UpdateBlogpostComponent } from './components/features/blog-post/update-blogpost/update-blogpost.component';
+import { ImageSelectorComponent } from './components/shared/image-selector/image-selector.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { UpdateBlogpostComponent } from './components/features/blog-post/update-
     BlogpostListComponent,
     AddBlogpostComponent,
     UpdateBlogpostComponent,
+    ImageSelectorComponent,
   ],
   imports: [
     BrowserModule,

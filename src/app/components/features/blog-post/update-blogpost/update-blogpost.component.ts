@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BlogpostService } from '../services/blogpost.service';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { BlogPost } from '../models/blogpost.model';
 import { Category } from '../../category/models/category.model';
 import { CategoryService } from '../../category/services/category.service';
 import { UpdateBlogPost } from '../models/update-blogpost.model';
+import { ImageService } from 'src/app/components/shared/image-selector/services/image.service';
 
 @Component({
   selector: 'app-update-blogpost',
@@ -15,28 +15,31 @@ import { UpdateBlogPost } from '../models/update-blogpost.model';
 })
 export class UpdateBlogpostComponent implements OnInit, OnDestroy {
   id: string | null = '';
-  paramsSubscribtion?: Subscription;
-  updateSubscribtion?: Subscription;
-  getSubscribtion?: Subscription;
-  deleteSubscribtion?: Subscription;
+  paramsSubscription?: Subscription;
+  updateSubscription?: Subscription;
+  getSubscription?: Subscription;
+  deleteSubscription?: Subscription;
+  imageSelectSubscription?: Subscription;
   blogPost?: BlogPost;
   categories$?: Observable<Category[]>;
   selectCategories?: string[];
+  isImageSelectorVisible: boolean = false;
 
   constructor(
     private _blogpostService: BlogpostService,
     private _categoryService: CategoryService,
+    private _imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.categories$ = this._categoryService.getCategories();
-    this.paramsSubscribtion = this.route.paramMap.subscribe({
+    this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
         if (this.id) {
-          this.getSubscribtion = this._blogpostService
+          this.getSubscription = this._blogpostService
             .getBlogPost(this.id)
             .subscribe({
               next: (response) => {
@@ -47,6 +50,18 @@ export class UpdateBlogpostComponent implements OnInit, OnDestroy {
               },
             });
         }
+
+        this._imageService.onSelectImage().subscribe({
+          next: (response) => {
+            if (this.blogPost) {
+              this.blogPost.featuredImageUrl = response.url;
+              this.closeImageSelector();
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
       },
     });
   }
@@ -65,7 +80,7 @@ export class UpdateBlogpostComponent implements OnInit, OnDestroy {
         categories: this.selectCategories ?? [],
       };
 
-      this.updateSubscribtion = this._blogpostService
+      this.updateSubscription = this._blogpostService
         .updateBlogPost(this.id, updateBlogPost)
         .subscribe({
           next: (resposnse) => {
@@ -80,7 +95,7 @@ export class UpdateBlogpostComponent implements OnInit, OnDestroy {
 
   onDeleteBlogPost() {
     if (this.id) {
-      this.deleteSubscribtion = this._blogpostService
+      this.deleteSubscription = this._blogpostService
         .deleteBlogPost(this.id)
         .subscribe({
           next: (response) => {
@@ -93,10 +108,19 @@ export class UpdateBlogpostComponent implements OnInit, OnDestroy {
     }
   }
 
+  openImageSelector() {
+    this.isImageSelectorVisible = true;
+  }
+
+  closeImageSelector() {
+    this.isImageSelectorVisible = false;
+  }
+
   ngOnDestroy(): void {
-    this.paramsSubscribtion?.unsubscribe();
-    this.updateSubscribtion?.unsubscribe();
-    this.getSubscribtion?.unsubscribe();
-    this.deleteSubscribtion?.unsubscribe();
+    this.paramsSubscription?.unsubscribe();
+    this.updateSubscription?.unsubscribe();
+    this.getSubscription?.unsubscribe();
+    this.deleteSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
   }
 }

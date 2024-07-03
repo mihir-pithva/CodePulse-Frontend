@@ -57,8 +57,8 @@
         </div>
         <div class="mt-3">
           <label for="featuredImageUrl" class="form-label"
-            >Featured Image Url</label
-          >
+            >Featured Image Url
+          </label>
           <ng-container *ngIf="blogPost.featuredImageUrl !== ''">
             <div>
               <img
@@ -66,6 +66,13 @@
                 height="100"
                 class="my-2"
               />
+              <button
+                type="button"
+                class="btn btn-light m-5"
+                (click)="openImageSelector()"
+              >
+                Select Image
+              </button>
             </div>
           </ng-container>
 
@@ -142,4 +149,22 @@
   <ng-template #elseTemplate>
     <div class="alert alert-warning" role="alert">Blog Post Not Found !</div>
   </ng-template>
+</div>
+
+<div
+  class="images-container-modal"
+  [ngClass]="{
+    'd-block': isImageSelectorVisible,
+    'd-none': !isImageSelectorVisible
+  }"
+>
+  <button
+    type="button"
+    class="btn btn-light"
+    style="position: fixed; top: 10px; right: 10px"
+    (click)="closeImageSelector()"
+  >
+    X
+  </button>
+  <app-image-selector></app-image-selector>
 </div>
