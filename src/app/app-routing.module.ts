@@ -6,8 +6,18 @@ import { UpdateCategoryComponent } from './components/features/category/update-c
 import { BlogpostListComponent } from './components/features/blog-post/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './components/features/blog-post/add-blogpost/add-blogpost.component';
 import { UpdateBlogpostComponent } from './components/features/blog-post/update-blogpost/update-blogpost.component';
+import { HomeComponent } from './components/public/home/home.component';
+import { BlogDetailsComponent } from './components/public/blog-details/blog-details.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'blog/:url',
+    component: BlogDetailsComponent,
+  },
   {
     path: 'admin/categories',
     component: CategoryListComponent,
