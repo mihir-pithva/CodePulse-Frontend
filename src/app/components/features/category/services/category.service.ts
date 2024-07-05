@@ -5,19 +5,16 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { UpdateCategoryModel } from '../models/update-category.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private _http: HttpClient) {}
-
-  addCategory(category: AddCategoryModel): Observable<void> {
-    return this._http.post<void>(
-      `${environment.apiBaseUrl}/api/Categories`,
-      category
-    );
-  }
+  constructor(
+    private _http: HttpClient,
+    private _cookieService: CookieService
+  ) {}
 
   getCategories(): Observable<Category[]> {
     return this._http.get<Category[]>(
@@ -28,6 +25,13 @@ export class CategoryService {
   getCategory(id: string): Observable<Category> {
     return this._http.get<Category>(
       `${environment.apiBaseUrl}/api/Categories/${id}`
+    );
+  }
+
+  addCategory(category: AddCategoryModel): Observable<void> {
+    return this._http.post<void>(
+      `${environment.apiBaseUrl}/api/Categories`,
+      category
     );
   }
 

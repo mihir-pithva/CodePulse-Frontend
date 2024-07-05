@@ -6,7 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CategoryListComponent } from './components/features/category/category-list/category-list.component';
 import { AddCategoryComponent } from './components/features/category/add-category/add-category.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UpdateCategoryComponent } from './components/features/category/update-category/update-category.component';
 import { BlogpostListComponent } from './components/features/blog-post/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './components/features/blog-post/add-blogpost/add-blogpost.component';
@@ -15,6 +15,9 @@ import { UpdateBlogpostComponent } from './components/features/blog-post/update-
 import { ImageSelectorComponent } from './components/shared/image-selector/image-selector.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { BlogDetailsComponent } from './components/public/blog-details/blog-details.component';
+import { LoginComponent } from './components/features/auth/login/login.component';
+import { AuthInterceptor } from './components/interceptors/auth.interceptor';
+import { AuthGuard } from './components/features/auth/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { BlogDetailsComponent } from './components/public/blog-details/blog-deta
     ImageSelectorComponent,
     HomeComponent,
     BlogDetailsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { BlogDetailsComponent } from './components/public/blog-details/blog-deta
     HttpClientModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
