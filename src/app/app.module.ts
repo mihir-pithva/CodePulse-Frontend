@@ -41,7 +41,13 @@ import { AuthGuard } from './components/features/auth/guards/auth.guard';
     HttpClientModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [AuthGuard],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
