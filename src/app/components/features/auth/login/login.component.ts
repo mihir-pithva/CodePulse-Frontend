@@ -3,7 +3,6 @@ import { LoginUser } from './models/loginUser.model';
 import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,6 +21,7 @@ export class LoginComponent {
       password: '',
     };
   }
+  
 
   onFormSubmit() {
     this._authService.login(this.user).subscribe({
@@ -45,8 +45,8 @@ export class LoginComponent {
         this._router.navigateByUrl('/');
       },
       error: (error) => {
-        console.log(error);
-      },
+        alert(error.message)
+      }
     });
   }
 }
