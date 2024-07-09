@@ -1,0 +1,17 @@
+<div class="card container mt-5 p-4" id="main" >
+    <h1>Register Form</h1>
+    <form class='container mt-3' #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" [(ngModel)]="user.email"/>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" [(ngModel)]="user.password"/>
+
+        </div>
+        <div class="d-flex justify-content-center pb-2 pt-3">
+            <button type="submit" id="btn" class="btn btn-primary">Register</button>
+          </div>
+    </form>
+</div>

@@ -40,6 +40,8 @@ export class LoginComponent {
           email: response.email,
           roles: response.roles,
         });
+        console.log(this._authService.getUser());
+        
         this._router.navigateByUrl('/');
       },
       error: (error) => {

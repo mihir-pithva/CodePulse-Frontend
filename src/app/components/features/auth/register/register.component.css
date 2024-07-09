@@ -1,8 +1,13 @@
-#main{
-  background-color: #D3DCE6;
+.btn {
+  width: 50%;
+  height: auto;
+  background-color: #000080;
+  color: white;
+}
+.card {
+  background-color: #d3dce6;
   box-shadow: 10px 10px 8px 6px;
 }
-
 #main {
     @media screen and (min-width:901px) {
       width: 40%;
@@ -28,12 +33,6 @@
       width: 70%;
     }
   }
-h1{
+ h1{
     text-align: center;
-}
-#btn {
-  width: 50%;
-  height: auto;
-  background-color: #000080;
-  color: white;
-}
+  }

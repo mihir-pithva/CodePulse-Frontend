@@ -10,6 +10,7 @@ import { HomeComponent } from './components/public/home/home.component';
 import { BlogDetailsComponent } from './components/public/blog-details/blog-details.component';
 import { LoginComponent } from './components/features/auth/login/login.component';
 import { AuthGuard } from './components/features/auth/guards/auth.guard';
+import { RegisterComponent } from './components/features/auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'blog/:url',
