@@ -18,3 +18,16 @@
 h2 {
   color: darkslategrey;
 }
+
+body{
+  background-color:rgba(128, 128, 128, 0.212);
+}
+h1{
+  text-align: center;
+  text-shadow: 2px 2px 8px #414141fc;
+}
+
+
+
+
+
