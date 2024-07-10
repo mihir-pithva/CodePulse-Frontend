@@ -19,6 +19,8 @@ import { LoginComponent } from './components/features/auth/login/login.component
 import { AuthGuard } from './components/features/auth/guards/auth.guard';
 import { RegisterComponent } from './components/features/auth/register/register.component';
 import { AuthInterceptor } from './components/interceptors/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,13 @@ import { AuthInterceptor } from './components/interceptors/auth.interceptor';
     FormsModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     {
