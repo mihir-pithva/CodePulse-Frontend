@@ -18,6 +18,7 @@ import { BlogDetailsComponent } from './components/public/blog-details/blog-deta
 import { LoginComponent } from './components/features/auth/login/login.component';
 import { AuthGuard } from './components/features/auth/guards/auth.guard';
 import { RegisterComponent } from './components/features/auth/register/register.component';
+import { AuthInterceptor } from './components/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { RegisterComponent } from './components/features/auth/register/register.
     HomeComponent,
     BlogDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,13 @@ import { RegisterComponent } from './components/features/auth/register/register.
     HttpClientModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [AuthGuard],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
