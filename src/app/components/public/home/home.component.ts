@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BlogpostService } from '../../features/blog-post/services/blogpost.service';
 import { BlogPost } from '../../features/blog-post/models/blogpost.model';
 import { SelectCategoryNameService } from '../../shared/services/selectCategoryName.service';

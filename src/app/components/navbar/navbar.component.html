@@ -15,40 +15,40 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="'/'"
+            (click)="filterBlogs('')"
+            >Home</a
+          >
         </li>
-        <div *ngIf="categories.length > 0">
-          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <button
-                  class="btn btn-dark dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [routerLink]="'/'"
-                  id="categoriesDropdown"
-                >
-                  Categories {{ cname ? "(" + cname + ")" : "(All)" }}
-                </button>
-                <ul
-                  class="dropdown-menu dropdown-menu-dark"
-                  aria-labelledby="categoriesDropdown"
-                >
-                  <li>
-                    <a class="dropdown-item" (click)="filterBlogs('')">All</a>
-                  </li>
-                  <li *ngFor="let category of categories">
-                    <a
-                      class="dropdown-item"
-                      (click)="filterBlogs(category.name)"
-                      >{{ category.name }}</a
-                    >
-                  </li>
-                </ul>
+        <ng-container *ngIf="categories.length > 0">
+          <li class="nav-item dropdown">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [routerLink]="'/'"
+              id="categoriesDropdown"
+            >
+              Categories {{ cname ? "(" + cname + ")" : "(All)" }}
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="categoriesDropdown"
+            >
+              <li>
+                <a class="dropdown-item" (click)="filterBlogs('')">All</a>
+              </li>
+              <li *ngFor="let category of categories">
+                <a class="dropdown-item" (click)="filterBlogs(category.name)">{{
+                  category.name
+                }}</a>
               </li>
             </ul>
-          </div>
-        </div>
+          </li>
+        </ng-container>
         <ng-container
           *ngIf="user?.email !== undefined && user?.roles?.includes('Writer')"
         >

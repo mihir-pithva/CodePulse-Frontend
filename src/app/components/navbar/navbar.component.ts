@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AuthService } from '../features/auth/services/auth.service';
 import { User } from '../features/auth/login/models/User.model';
 import { Router } from '@angular/router';
@@ -12,10 +18,15 @@ import { SelectCategoryNameService } from '../shared/services/selectCategoryName
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  categories: Category[] = []
-  cname: string = ""
+  categories: Category[] = [];
+  cname: string = '';
   user?: User;
-  constructor(private _authService: AuthService, private _router: Router,private _catergoryService:CategoryService,private _categorySelect: SelectCategoryNameService) {}
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+    private _catergoryService: CategoryService,
+    private _categorySelect: SelectCategoryNameService
+  ) {}
   ngOnInit(): void {
     this._authService.user().subscribe({
       next: (response) => {
@@ -30,21 +41,17 @@ export class NavbarComponent implements OnInit {
 
     this._catergoryService.getCategories().subscribe({
       next: (response) => {
-        this.categories = response
-        console.log(this.categories);
-        
+        this.categories = response;
       },
       error: (error) => {
         console.log(error);
-        
-      }
-    })
-
-
+      },
+    });
   }
-  filterBlogs(name: string){
-    this._categorySelect.setSelectedCategory(name)
-    this.cname = name
+
+  filterBlogs(name: string) {
+    this._categorySelect.setSelectedCategory(name);
+    this.cname = name;
   }
   onLogout() {
     this._authService.logout();
