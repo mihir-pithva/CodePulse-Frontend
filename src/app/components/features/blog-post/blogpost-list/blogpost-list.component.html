@@ -1,6 +1,5 @@
-
 <div class="container">
-  <h1 class="mt-4">Blog Posts</h1>
+  <h1 class="mt-4">Blog-Post List</h1>
   <div class="d-flex justify-content-end mt-4">
     <a [routerLink]="['/admin/blogposts/add']" class="btn btn-primary">
       Add New Blog Post
@@ -9,13 +8,13 @@
   <div class="mt-4">
     <div *ngIf="blogPosts.length > 0; else elseTemplate">
       <div class="table-responsive">
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-hover">
           <thead class="table-dark">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Sr No.</th>
               <th scope="col">Title</th>
               <th scope="col">Short Description</th>
-              <th scope="col" >Visibility</th>
+              <th scope="col">Visibility</th>
               <th scope="col">Categories</th>
               <th scope="col">Action</th>
             </tr>
@@ -26,17 +25,31 @@
               <td>{{ blogpost.title }}</td>
               <td>{{ blogpost.shortDescription }}</td>
               <td>
-                <span id="Visible" [ngClass]="{'badge bg-success': blogpost.isVisible, 'badge bg-danger': !blogpost.isVisible}">
-                  {{ blogpost.isVisible ? 'Visible' : 'Hidden' }}
+                <span
+                  id="VisibilityBadge"
+                  [ngClass]="{
+                    'badge bg-success': blogpost.isVisible,
+                    'badge bg-danger': !blogpost.isVisible
+                  }"
+                  data-bs-toggle="tooltip"
+                  title="{{ blogpost.isVisible ? 'Visible' : 'Hidden' }}"
+                >
+                  {{ blogpost.isVisible ? "Visible" : "Hidden" }}
                 </span>
               </td>
               <td>
-                <span *ngFor="let category of blogpost.categories" class="badge bg-secondary me-1">
+                <span
+                  *ngFor="let category of blogpost.categories"
+                  class="badge bg-secondary me-1"
+                >
                   {{ category.name }}
                 </span>
               </td>
               <td>
-                <a [routerLink]="['/admin/blogposts/', blogpost.id]" class="btn btn-primary btn-sm">
+                <a
+                  [routerLink]="['/admin/blogposts/', blogpost.id]"
+                  class="btn btn-primary btn-sm"
+                >
                   Edit
                 </a>
               </td>

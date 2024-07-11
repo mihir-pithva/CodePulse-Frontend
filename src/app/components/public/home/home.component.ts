@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BlogpostService } from '../../features/blog-post/services/blogpost.service';
-import { Observable } from 'rxjs';
 import { BlogPost } from '../../features/blog-post/models/blogpost.model';
 import { SelectCategoryNameService } from '../../shared/services/selectCategoryName.service';
 
@@ -10,19 +9,22 @@ import { SelectCategoryNameService } from '../../shared/services/selectCategoryN
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  blogs: BlogPost[] = []
+  blogs: BlogPost[] = [];
 
-  name: string = ""
+  name: string = '';
 
-  constructor(private _blogPostService: BlogpostService, private _catergorySelect: SelectCategoryNameService) {}
+  constructor(
+    private _blogPostService: BlogpostService,
+    private _catergorySelect: SelectCategoryNameService
+  ) {}
 
   ngOnInit() {
     this._catergorySelect.selectedCategory$.subscribe({
       next: (name) => {
-        this.name = name
+        this.name = name;
         console.log(this.name);
-        this.loadBlogs()
-      }
+        this.loadBlogs();
+      },
     });
     this.loadBlogs();
   }
@@ -30,8 +32,8 @@ export class HomeComponent implements OnInit {
   loadBlogs() {
     this._blogPostService.getAllBlogPosts().subscribe({
       next: (response) => {
-        this.blogs = response;
-        if (this.name !== "") {
+        this.blogs = response.filter((blog) => blog.isVisible === true);
+        if (this.name !== '') {
           this.blogs = this.blogs.filter((blog) => {
             return blog.categories.some((c) => c.name === this.name);
           });
@@ -39,7 +41,7 @@ export class HomeComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
-      }
+      },
     });
   }
 }

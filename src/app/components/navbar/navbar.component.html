@@ -15,21 +15,34 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="'/'">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
         <div *ngIf="categories.length > 0">
           <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [routerLink]="'/'">
-                  Categories {{cname ? '(' + cname + ')': ""}}
+                <button
+                  class="btn btn-dark dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [routerLink]="'/'"
+                  id="categoriesDropdown"
+                >
+                  Categories {{ cname ? "(" + cname + ")" : "(All)" }}
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li *ngFor="let category of categories">
-                    <a class="dropdown-item" (click)="filterBlogs(category.name)">{{category.name}}</a>
-                  </li>
+                <ul
+                  class="dropdown-menu dropdown-menu-dark"
+                  aria-labelledby="categoriesDropdown"
+                >
                   <li>
                     <a class="dropdown-item" (click)="filterBlogs('')">All</a>
+                  </li>
+                  <li *ngFor="let category of categories">
+                    <a
+                      class="dropdown-item"
+                      (click)="filterBlogs(category.name)"
+                      >{{ category.name }}</a
+                    >
                   </li>
                 </ul>
               </li>
@@ -49,7 +62,7 @@
             >
               Admin
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-dark">
               <li>
                 <a class="dropdown-item" [routerLink]="['/admin/categories']"
                   >Category List</a
