@@ -13,6 +13,7 @@
             <tr>
               <th scope="col">Sr No.</th>
               <th scope="col">Title</th>
+              <th scope="col">Author</th>
               <th scope="col">Short Description</th>
               <th scope="col">Visibility</th>
               <th scope="col">Categories</th>
@@ -23,6 +24,7 @@
             <tr *ngFor="let blogpost of blogPosts; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ blogpost.title }}</td>
+              <td>{{ blogpost.author }}</td>
               <td>{{ blogpost.shortDescription }}</td>
               <td>
                 <span
