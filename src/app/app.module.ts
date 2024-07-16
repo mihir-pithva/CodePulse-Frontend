@@ -16,7 +16,6 @@ import { ImageSelectorComponent } from './components/shared/image-selector/image
 import { HomeComponent } from './components/public/home/home.component';
 import { BlogDetailsComponent } from './components/public/blog-details/blog-details.component';
 import { LoginComponent } from './components/features/auth/login/login.component';
-import { AuthGuard } from './components/features/auth/guards/auth.guard';
 import { RegisterComponent } from './components/features/auth/register/register.component';
 import { AuthInterceptor } from './components/interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';

@@ -1,14 +1,28 @@
-.card-image-top{
-    height: 300px;
+.card-image-top {
+  height: 300px;
 }
-.card-body{
-    background-color: #eef1f7;
-    
+.card-body {
+  background-color: #eef1f7;
 }
-.card{
-    box-shadow: 10px 10px 6px 6px;
-    background-color: #eef1f7;
+.card {
+  box-shadow: 10px 10px 6px 6px;
+  background-color: #eef1f7;
 }
-div,img{
-    border-radius: 25px;
+div,
+img {
+  border-radius: 25px;
+}
+
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+}
+
+.spinner-border {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50px;
 }
