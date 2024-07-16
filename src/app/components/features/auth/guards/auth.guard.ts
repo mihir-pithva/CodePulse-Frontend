@@ -10,6 +10,7 @@ import {
 import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 
 // export const authGuard: CanActivateFn = (route, state) => {
 //   const cookieService: CookieService = new CookieService(document, PLATFORM_ID);
@@ -58,7 +59,8 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) {}
 
   canActivate(
@@ -84,7 +86,12 @@ export class AuthGuard implements CanActivate {
         if (user && user.roles && user.roles.includes('Writer')) {
           return true;
         } else {
-          alert('Unauthorized ! Please login as admin to access this route !!');
+          this.authService.logout();
+          this.router.navigateByUrl('/login');
+          this.toast.error(
+            'Login as admin to access this route !',
+            'Unauthorized'
+          );
           return false;
           // if (confirm('Please login as admin to access this route !! ')) {
           //   this.router.navigateByUrl('/login');

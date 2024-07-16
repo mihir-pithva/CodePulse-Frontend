@@ -1,31 +1,29 @@
 <div class="card container mt-5 p-4" id="main">
-  <h1>Login</h1>
+  <h1>Register</h1>
   <form class="container mt-3" #form="ngForm" (ngSubmit)="onFormSubmit()">
     <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input
-        type="text"
+        type="email"
         class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
         name="email"
-        id="email"
         [(ngModel)]="user.email"
       />
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
+      <label for="exampleInputPassword1" class="form-label">Password</label>
       <input
         type="password"
         class="form-control"
+        id="exampleInputPassword1"
         name="password"
-        id="password"
         [(ngModel)]="user.password"
       />
     </div>
     <div class="d-flex justify-content-center pb-2 pt-3">
-      <button type="submit" id="btn" class="btn btn-primary">Login</button>
-    </div>
-    <div class="d-flex justify-content-center pb-2 pt-3">
-      <a [routerLink]="['/register']">Click here to create account</a>
+      <button type="submit" id="btn" class="btn btn-primary">Register</button>
     </div>
   </form>
 </div>

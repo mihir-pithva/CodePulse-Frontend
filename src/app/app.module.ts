@@ -16,8 +16,10 @@ import { ImageSelectorComponent } from './components/shared/image-selector/image
 import { HomeComponent } from './components/public/home/home.component';
 import { BlogDetailsComponent } from './components/public/blog-details/blog-details.component';
 import { LoginComponent } from './components/features/auth/login/login.component';
+import { RegisterComponent } from './components/features/auth/register/register.component';
 import { AuthInterceptor } from './components/interceptors/auth.interceptor';
-import { AuthGuard } from './components/features/auth/guards/auth.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AuthGuard } from './components/features/auth/guards/auth.guard';
     HomeComponent,
     BlogDetailsComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,13 @@ import { AuthGuard } from './components/features/auth/guards/auth.guard';
     FormsModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     {

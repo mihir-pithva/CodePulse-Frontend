@@ -15,8 +15,40 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="'/'"
+            (click)="filterBlogs('')"
+            >Home</a
+          >
         </li>
+        <ng-container *ngIf="categories.length > 0">
+          <li class="nav-item dropdown">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [routerLink]="'/'"
+              id="categoriesDropdown"
+            >
+              Categories {{ cname ? "(" + cname + ")" : "(All)" }}
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="categoriesDropdown"
+            >
+              <li>
+                <a class="dropdown-item" (click)="filterBlogs('')">All</a>
+              </li>
+              <li *ngFor="let category of categories">
+                <a class="dropdown-item" (click)="filterBlogs(category.name)">{{
+                  category.name
+                }}</a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
         <ng-container
           *ngIf="user?.email !== undefined && user?.roles?.includes('Writer')"
         >
@@ -30,7 +62,7 @@
             >
               Admin
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-dark">
               <li>
                 <a class="dropdown-item" [routerLink]="['/admin/categories']"
                   >Category List</a
@@ -51,7 +83,7 @@
       </ng-container>
       <ng-template #elseTemplate>
         <div class="d-flex">
-          <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+          <a [routerLink]="['/login']" class="btn btn-primary me-2">Login</a>
         </div>
       </ng-template>
     </div>

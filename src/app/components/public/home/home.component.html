@@ -1,9 +1,9 @@
 <div class="container">
   <div class="my-5">
     <div class="row align-items-strech">
-      <ng-container *ngIf="blogs$ | async as blogs; else elseTemplate">
+      <ng-container *ngIf="blogs.length > 0; else elseTemplate">
         <h1 class="text-center mb-2">Welcome to CodePulse !</h1>
-        <div class="col-12 col-md-4 mt-3" *ngFor="let blog of blogs">
+        <div class="col-12 col-md-4 mt-5" *ngFor="let blog of blogs">
           <div class="card h-100 border-3">
             <img
               class="card-image-top"
@@ -18,7 +18,7 @@
               <span class="d-flex align-items-end" style="flex: 1">
                 <a
                   [routerLink]="['/blog', blog.urlHandle]"
-                  class="btn btn-primary"
+                  class="btn btn-outline-dark"
                   >Read more..</a
                 >
               </span>
@@ -27,7 +27,12 @@
         </div>
       </ng-container>
       <ng-template #elseTemplate>
-        <h1 class="text-danger">No Blogs to Display !</h1>
+        <!-- <h1 class="text-danger">No Blogs to Display !</h1> -->
+        <div class="spinner-container">
+          <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
       </ng-template>
     </div>
   </div>
